@@ -1,0 +1,7 @@
+FDC TALLER - CATÁLOGO CON FOTOS
+
+Contenido: index.html, fdc-taller-logo.png y carpeta imagenes con las fotos del catálogo.
+
+Para publicar: sube/reemplaza index.html y el logo en la raíz de tu repositorio de GitHub Pages; sube también la carpeta imagenes completa conservando los nombres de archivo.
+
+No renombres archivos dentro de imagenes sin actualizar sus rutas en index.html. Los precios se muestran como “Precio a confirmar” y las consultas se hacen por WhatsApp.
