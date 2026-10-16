@@ -1,7 +1,14 @@
-FDC TALLER - CATÁLOGO CON FOTOS
+FDC TALLER — VERSION CON FOTOGRAFIAS OPTIMIZADAS
 
-Contenido: index.html, fdc-taller-logo.png y carpeta imagenes con las fotos del catálogo.
+Esta versión conserva el diseño y las funciones del sitio, pero convierte las fotos del catálogo a WebP y reduce su tamaño para que descarguen más rápido. Las imágenes del catálogo mantienen carga diferida (lazy loading) y ahora usan decodificación asíncrona.
 
-Para publicar: sube/reemplaza index.html y el logo en la raíz de tu repositorio de GitHub Pages; sube también la carpeta imagenes completa conservando los nombres de archivo.
+PARA ACTUALIZAR:
+1. Descomprime este ZIP.
+2. En tu repositorio GitHub FDC-Taller-, reemplaza catalogo.html e index.html por los archivos de esta carpeta.
+3. Reemplaza la carpeta imagenes completa por la carpeta imagenes de este ZIP. IMPORTANTE: ahora las fotos tienen extensión .webp; sube la carpeta completa, no mezcles con la anterior.
+4. Conserva fdc-taller-logo.png.
+5. Guarda los cambios con Commit changes y espera unos minutos.
+6. Abre el catálogo en una pestaña de incógnito para comprobar la versión nueva.
 
-No renombres archivos dentro de imagenes sin actualizar sus rutas en index.html. Los precios se muestran como “Precio a confirmar” y las consultas se hacen por WhatsApp.
+No cambies los nombres de los archivos. No borres la carpeta imagenes.
+El carrito y el botón de WhatsApp se mantienen. El cliente todavía debe pulsar Enviar dentro de WhatsApp.
