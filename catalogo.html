@@ -46,6 +46,9 @@ body{background:#08090b;color:var(--text);font-family:Arial,Helvetica,sans-serif
 
 .catalog-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}.catalog-preview-item{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.catalog-preview-item span{display:inline-grid;place-items:center;width:34px;height:34px;border:1px solid #59616d;border-radius:50%;color:#d8dde4;font-weight:800;margin-bottom:18px}.catalog-preview-item strong{display:block;font-size:1.05rem}.catalog-preview-item p{color:var(--muted);line-height:1.5;margin-bottom:0}@media(max-width:600px){.catalog-preview-grid{grid-template-columns:1fr}.catalog-preview-item{padding:17px}}
 
+
+.cart-float{position:fixed;left:18px;bottom:18px;z-index:1001;display:flex;align-items:center;gap:9px;padding:13px 17px;border-radius:999px;background:linear-gradient(135deg,#f2f4f6,#aab4c0);color:#101114;font-weight:900;box-shadow:0 10px 30px #0009;border:1px solid #fff;cursor:pointer;font:inherit}.cart-float .bubble{display:inline-grid;place-items:center;min-width:23px;height:23px;padding:0 6px;border-radius:99px;background:#101114;color:#fff;font-size:.76rem;font-weight:900}.cart-float:hover{filter:brightness(1.08);transform:translateY(-2px)}@media(max-width:800px){.cart-float{left:12px;bottom:12px;padding:12px 14px;font-size:.88rem}}
+
 </style>
 </head><body>
 <div class="top">FDC Taller · Catálogo de repuestos y accesorios · Holguín, Cuba</div>
@@ -90,8 +93,9 @@ body{background:#08090b;color:var(--text);font-family:Arial,Helvetica,sans-serif
 <article class="product" data-category="accesorios"><div class="product-art has-photo"><img src="imagenes/pizzara-de-unico.webp" alt="Pizzara de unico" loading="lazy" decoding="async"><span class="product-placeholder" aria-hidden="true"></span></div><div class="product-body"><div class="tag">Accesorios</div><h3>Pizzara de unico</h3><p>Consulta compatibilidad y disponibilidad.</p><button class="btn add-cart" data-product="Pizzara de unico">Añadir al carrito +</button></div></article>
 <article class="product" data-category="energia"><div class="product-art has-photo"><img src="imagenes/toma-de-carga.webp" alt="Toma de carga" loading="lazy" decoding="async"><span class="product-placeholder" aria-hidden="true"></span></div><div class="product-body"><div class="tag">Carga y energía</div><h3>Toma de carga</h3><p>Consulta compatibilidad y disponibilidad.</p><button class="btn add-cart" data-product="Toma de carga">Añadir al carrito +</button></div></article>
 </div><div id="noResults" class="empty-results">No encontramos productos con ese nombre o categoría.</div>
-<div class="cartbox" style="margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel)"><div class="section-head" style="margin-bottom:12px"><div><div class="eyebrow">Tu pedido</div><h3 style="margin:6px 0">Tu carrito <span id="cartCount" class="cart-count">0</span></h3><p class="sub" style="margin:0">Añade los productos que te interesan y envía toda la lista por WhatsApp para consultar precio y disponibilidad.</p></div><button class="btn ghost" type="button" id="clearCart">Vaciar lista</button></div><ul id="cartList" style="color:var(--muted);padding-left:20px"><li>Aún no has añadido productos.</li></ul><button class="btn" type="button" id="prepareOrder">Preparar solicitud de pedido →</button><span id="cartMsg" class="form-msg" role="status" style="margin-left:12px"></span></div></div></section>
+<div class="cartbox" id="cartbox" style="margin-top:18px;padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel)"><div class="section-head" style="margin-bottom:12px"><div><div class="eyebrow">Tu pedido</div><h3 style="margin:6px 0">Tu carrito <span id="cartCount" class="cart-count">0</span></h3><p class="sub" style="margin:0">Añade los productos que te interesan y envía toda la lista por WhatsApp para consultar precio y disponibilidad.</p></div><button class="btn ghost" type="button" id="clearCart">Vaciar lista</button></div><ul id="cartList" style="color:var(--muted);padding-left:20px"><li>Aún no has añadido productos.</li></ul><button class="btn" type="button" id="prepareOrder">Preparar solicitud de pedido →</button><span id="cartMsg" class="form-msg" role="status" style="margin-left:12px"></span></div></div></section>
 </main>
+<button class="cart-float" id="floatingCart" type="button" aria-label="Ir al carrito">▣ <span>Carrito</span><span class="bubble" id="floatingCartCount">0</span></button>
 <a class="whatsapp-float" href="https://wa.me/5363634928?text=Hola%20FDC%20Taller%2C%20quisiera%20consultar%20por%20un%20producto%20o%20servicio." target="_blank" rel="noopener" aria-label="Contactar a FDC Taller por WhatsApp">☏ <span>WhatsApp</span></a>
 <footer class="footer"><div class="wrap footer-inner"><div>© <span id="year"></span> FDC TALLER · Holguín, Cuba</div><div><a href="index.html">Inicio</a> · <a href="index.html#servicios">Servicios</a> · <a href="index.html#citas">Citas</a></div></div></footer>
 <script>
@@ -105,8 +109,10 @@ const cart=[];
 const cartList=document.getElementById('cartList');
 const cartMsg=document.getElementById('cartMsg');
 const cartCount=document.getElementById('cartCount');
+const floatingCartCount=document.getElementById('floatingCartCount');
+document.getElementById('floatingCart').addEventListener('click',()=>document.getElementById('cartbox').scrollIntoView({behavior:'smooth',block:'start'}));
 function renderCart(){
- cartCount.textContent=cart.length;
+ cartCount.textContent=cart.length; if(floatingCartCount) floatingCartCount.textContent=cart.length;
  if(!cart.length){cartList.innerHTML='<li>Aún no has añadido productos.</li>';return;}
  cartList.innerHTML='';
  const counts={}; cart.forEach(name=>counts[name]=(counts[name]||0)+1);

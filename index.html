@@ -46,6 +46,13 @@ body{background:#08090b;color:var(--text);font-family:Arial,Helvetica,sans-serif
 
 .catalog-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}.catalog-preview-item{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.catalog-preview-item span{display:inline-grid;place-items:center;width:34px;height:34px;border:1px solid #59616d;border-radius:50%;color:#d8dde4;font-weight:800;margin-bottom:18px}.catalog-preview-item strong{display:block;font-size:1.05rem}.catalog-preview-item p{color:var(--muted);line-height:1.5;margin-bottom:0}@media(max-width:600px){.catalog-preview-grid{grid-template-columns:1fr}.catalog-preview-item{padding:17px}}
 
+
+/* Hero con fotografía de moto eléctrica desvanecida detrás del titular */
+.hero{position:relative;isolation:isolate;overflow:hidden;border-radius:0;background:#090a0c}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(7,8,10,.98) 0%,rgba(7,8,10,.82) 43%,rgba(7,8,10,.30) 100%),linear-gradient(0deg,rgba(7,8,10,.95) 0%,rgba(7,8,10,.08) 48%,rgba(7,8,10,.45) 100%),url("hero-moto.webp") right center/cover no-repeat;opacity:.9}
+.hero>div{position:relative;z-index:1}
+@media(max-width:800px){.hero{background:#090a0c}.hero:after{background:linear-gradient(90deg,rgba(7,8,10,.90) 0%,rgba(7,8,10,.62) 62%,rgba(7,8,10,.42) 100%),linear-gradient(0deg,rgba(7,8,10,.92) 0%,rgba(7,8,10,.12) 65%,rgba(7,8,10,.25) 100%),url("hero-moto.webp") 63% center/cover no-repeat;opacity:.88}.hero .visual{background:transparent!important}}
+
 </style>
 </head>
 <body>
@@ -63,6 +70,8 @@ body{background:#08090b;color:var(--text);font-family:Arial,Helvetica,sans-serif
 </div></section>
 </main>
 <a class="whatsapp-float" href="https://wa.me/5363634928?text=Hola%20FDC%20Taller%2C%20quisiera%20consultar%20por%20un%20producto%20o%20servicio." target="_blank" rel="noopener" aria-label="Contactar a FDC Taller por WhatsApp">☏ <span>WhatsApp</span></a>
+<a class="cart-float-home" href="catalogo.html#cartbox" aria-label="Abrir carrito de compras">▣ <span>Carrito</span></a>
+<style>.cart-float-home{position:fixed;left:18px;bottom:18px;z-index:1001;display:flex;align-items:center;gap:9px;padding:13px 17px;border-radius:999px;background:linear-gradient(135deg,#f2f4f6,#aab4c0);color:#101114;font-weight:850;box-shadow:0 10px 30px #0009;border:1px solid #fff}.cart-float-home:hover{filter:brightness(1.08);transform:translateY(-2px)}@media(max-width:800px){.cart-float-home{left:12px;bottom:12px;padding:12px 15px;font-size:.88rem}}</style>
 <footer class="footer"><div class="wrap footer-inner"><div>© <span id="year"></span> FDC TALLER · Holguín, Cuba</div><div><a href="catalogo.html">Catálogo</a> · <a href="#servicios">Servicios</a> · <a href="#citas">Citas</a> · <a href="#conocenos">Conócenos</a></div></div></footer>
 <script>
 const today = new Date();
